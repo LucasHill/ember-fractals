@@ -1,14 +1,14 @@
 {
   "name": "ember-fractals",
   "version": "0.0.0",
-  "description": "Small description for ember-fractals goes here",
+  "description": "https://github.com/Swizec/react-fractals/",
   "license": "MIT",
-  "author": "",
+  "author": "Lucas Hill",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
+  "repository": "https://github.com/LucasHill/ember-fractals",
   "scripts": {
     "build": "ember build",
     "start": "ember server",
@@ -17,6 +17,7 @@
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
     "ember-ajax": "^3.0.0",
+    "ember-browserify": "^1.1.13",
     "ember-cli": "2.13.2",
     "ember-cli-app-version": "^3.0.0",
     "ember-cli-babel": "^6.0.0",
@@ -34,11 +35,15 @@
     "ember-load-initializers": "^1.0.0",
     "ember-resolver": "^4.0.0",
     "ember-source": "~2.13.0",
-    "ember-welcome-page": "^3.0.0",
     "loader.js": "^4.2.3"
   },
   "engines": {
-    "node": ">= 4"
+    "node": ">= 6"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "d3-scale": "^1.0.6",
+    "d3-selection": "^1.1.0",
+    "phantomjs-prebuilt": "^2.1.14"
+  }
 }
