@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import d3Selection from 'npm:d3-selection';
 import d3Scale from 'npm:d3-scale';
+import { task } from 'ember-concurrency';
 
 const SVG_SELECTOR = '#rootSVG';
 
@@ -31,9 +32,20 @@ export default Ember.Controller.extend({
   },
 
   onMouseMove() {
-// debugger;
+    this.get('update').perform();                      
+  },
+
+  update: task(function * () {
     const svg = Ember.$(SVG_SELECTOR);
     const [x, y] = d3Selection.mouse(svg[0]);
+    
+    let promise = new window.Promise(function(resolve) {
+      window.requestAnimationFrame(function() {
+        resolve();
+      })
+    });
+
+    yield promise;
 
     const scaleFactor = d3Scale.scaleLinear().domain([this.get('svgHeight'), 0])
                                       .range([0, .8])
@@ -44,8 +56,8 @@ export default Ember.Controller.extend({
                                     .range([.5, 0, -.5]);
 
     this.set('heightFactor', scaleFactor(y));
-    this.set('lean', scaleLean(x));                         
-  },
+    this.set('lean', scaleLean(x)); 
+  }).drop(),
 
 
   xPos: Ember.computed('svgWidth', function() {
