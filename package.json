@@ -27,6 +27,8 @@
     "@ember/test-helpers": "^2.2.0",
     "@glimmer/component": "^1.0.3",
     "@glimmer/tracking": "^1.0.3",
+    "@types/d3-scale": "^1.0.0",
+    "@types/d3-selection": "^1.0.0",
     "@types/ember-data": "^3.16.12",
     "@types/ember-qunit": "^3.4.13",
     "@types/ember-resolver": "^5.0.10",
