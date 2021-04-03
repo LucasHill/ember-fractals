@@ -1,21 +1,11 @@
-{{#if shouldRecurse}}
-  <g transform="translate({{x}} {{y}}) {{rotate}}">
-    <rect width="{{w}}" height="{{w}}"
+{{#if this.shouldRecurse}}
+  <g transform="translate({{@x}} {{@y}}) {{this.rotate}}">
+    <rect width="{{@w}}" height="{{@w}}"
           x="0" y="0"
-          style="fill:{{fill}}"/>
+          style="fill:{{this.fill}}"/>
 
-    {{dynamic-fractal w=nextLeft
-                x=0 y=nextYLeft
-                lvl=plusLvl maxlvl=maxlvl
-                heightFactor=heightFactor
-                lean=lean
-                left=true }}
+    <DynamicFractal @w={{this.nextLeft}} @x={{0}} @y={{this.nextYLeft}} @lvl={{this.plusLvl}} @maxlvl={{@maxlvl}} @heightFactor={{@heightFactor}} @lean={{@lean}} @left={{true}} />
 
-    {{dynamic-fractal w=nextRight
-                x=nextXRight y=nextYRight
-                lvl=plusLvl maxlvl=maxlvl
-                heightFactor=heightFactor
-                lean=lean
-                right=true }}
+    <DynamicFractal @w={{this.nextRight}} @x={{this.nextXRight}} @y={{this.nextYRight}} @lvl={{this.plusLvl}} @maxlvl={{@maxlvl}} @heightFactor={{@heightFactor}} @lean={{@lean}} @right={{true}} />
   </g>
 {{/if}}
