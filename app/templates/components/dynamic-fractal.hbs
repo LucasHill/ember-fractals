@@ -4,18 +4,8 @@
           x="0" y="0"
           style="fill:{{fill}}"/>
 
-    {{dynamic-fractal w=nextLeft
-                x=0 y=nextYLeft
-                lvl=plusLvl maxlvl=maxlvl
-                heightFactor=heightFactor
-                lean=lean
-                left=true }}
+    <DynamicFractal @w={{nextLeft}} @x={{0}} @y={{nextYLeft}} @lvl={{plusLvl}} @maxlvl={{maxlvl}} @heightFactor={{heightFactor}} @lean={{lean}} @left={{true}} />
 
-    {{dynamic-fractal w=nextRight
-                x=nextXRight y=nextYRight
-                lvl=plusLvl maxlvl=maxlvl
-                heightFactor=heightFactor
-                lean=lean
-                right=true }}
+    <DynamicFractal @w={{nextRight}} @x={{nextXRight}} @y={{nextYRight}} @lvl={{plusLvl}} @maxlvl={{maxlvl}} @heightFactor={{heightFactor}} @lean={{lean}} @right={{true}} />
   </g>
 {{/if}}

@@ -1,8 +1,9 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 import memoizedCalc from 'ember-fractals/utils/memoized-calc';
 import d3Scale from 'd3-scale';
 
-export default Ember.Component.extend({
+export default Component.extend({
   tagName: '',
 
   w: null,
@@ -13,20 +14,20 @@ export default Ember.Component.extend({
   left: null,
   right: null,
   lvl: null,
-  plusLvl: Ember.computed('lvl', function() {
-    return this.get('lvl') + 1;
+  plusLvl: computed('lvl', function() {
+    return this.lvl + 1;
   }),
   maxlvl: null,
 
   nextRight: null,
-  nextYRight: Ember.computed('nextRight', function() {
-    return -this.get('nextRight');
+  nextYRight: computed('nextRight', function() {
+    return -this.nextRight;
   }),
-  nextYLeft: Ember.computed('nextLeft', function() {
-    return -this.get('nextLeft');
+  nextYLeft: computed('nextLeft', function() {
+    return -this.nextLeft;
   }),
-  nextXRight: Ember.computed('nextRight', 'w', function() {
-    return this.get('w') - this.get('nextRight');
+  nextXRight: computed('nextRight', 'w', function() {
+    return this.w - this.nextRight;
   }),
   nextLeft: null,
   aRotation: null,
@@ -34,9 +35,9 @@ export default Ember.Component.extend({
 
   didReceiveAttrs() { 
     const { nextRight, nextLeft, aRotation, bRotation } = memoizedCalc({
-        w: this.get('w'),
-        heightFactor: this.get('heightFactor'),
-        lean: this.get('lean')
+        w: this.w,
+        heightFactor: this.heightFactor,
+        lean: this.lean
     });
 
     this.set('nextRight', nextRight);
@@ -45,21 +46,21 @@ export default Ember.Component.extend({
     this.set('bRotation', bRotation);
   },
 
-  fill: Ember.computed('lvl', 'maxlvl', function() {
-    return d3Scale.interpolateViridis(this.get('lvl')/this.get('maxlvl'));
+  fill: computed('lvl', 'maxlvl', function() {
+    return d3Scale.interpolateViridis(this.lvl/this.maxlvl);
   }),
 
-  rotate: Ember.computed('aRotation', 'bRotation', 'left', 'right', 'w', function() {
-    const w = this.get('w');
-    if (this.get('left')) {
-      return `rotate(${-this.get('aRotation')} 0 ${w})`;
-    }else if (this.get('right')) {
-      return `rotate(${this.get('bRotation')} ${w} ${w})`;
+  rotate: computed('aRotation', 'bRotation', 'left', 'right', 'w', function() {
+    const w = this.w;
+    if (this.left) {
+      return `rotate(${-this.aRotation} 0 ${w})`;
+    }else if (this.right) {
+      return `rotate(${this.bRotation} ${w} ${w})`;
     }
   }),
 
-  shouldRecurse: Ember.computed('lvl', 'maxlvl', 'w', function() {
-    if (this.get('lvl') >= this.get('maxlvl') || this.get('w') < 1) {
+  shouldRecurse: computed('lvl', 'maxlvl', 'w', function() {
+    if (this.lvl >= this.maxlvl || this.w < 1) {
       return false;
     }
     return true;
