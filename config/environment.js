@@ -44,7 +44,7 @@ module.exports = function (environment) {
   }
 
   if (environment === 'production') {
-    ENV.rootURL = "ember-fractals/"
+    ENV.rootURL = 'ember-fractals/';
   }
 
   return ENV;

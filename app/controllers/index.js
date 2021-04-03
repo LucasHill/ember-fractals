@@ -15,11 +15,13 @@ export default Controller.extend({
   baseW: 80,
   heightFactor: 0,
   lean: 0,
-  
+
   init: function () {
     this._super(...arguments);
-    schedule("afterRender", this, function() {
-      d3Selection.select(SVG_SELECTOR).on("mousemove", this.onMouseMove.bind(this));
+    schedule('afterRender', this, function () {
+      d3Selection
+        .select(SVG_SELECTOR)
+        .on('mousemove', this.onMouseMove.bind(this));
       this.next();
     });
   },
@@ -28,8 +30,8 @@ export default Controller.extend({
     const currentMax = this.currentMax;
 
     if (currentMax < this.realMax) {
-        this.set('currentMax', currentMax + 1);
-        setTimeout(this.next.bind(this), 500);
+      this.set('currentMax', currentMax + 1);
+      setTimeout(this.next.bind(this), 500);
     }
   },
 
@@ -37,25 +39,27 @@ export default Controller.extend({
     const svg = document.querySelectorAll(SVG_SELECTOR);
     const [x, y] = d3Selection.mouse(svg[0]);
 
-    const scaleFactor = d3Scale.scaleLinear().domain([this.svgHeight, 0])
-                                      .range([0, .8])
+    const scaleFactor = d3Scale
+      .scaleLinear()
+      .domain([this.svgHeight, 0])
+      .range([0, 0.8]);
 
     const svgWidth = this.svgWidth;
 
-    const scaleLean = d3Scale.scaleLinear().domain([0, svgWidth/2, svgWidth])
-                                    .range([.5, 0, -.5]);
+    const scaleLean = d3Scale
+      .scaleLinear()
+      .domain([0, svgWidth / 2, svgWidth])
+      .range([0.5, 0, -0.5]);
 
     this.set('heightFactor', scaleFactor(y));
-    this.set('lean', scaleLean(x));                         
+    this.set('lean', scaleLean(x));
   },
 
-
-  xPos: computed('svgWidth', function() {
-    return this.svgWidth/2 - 40;
+  xPos: computed('svgWidth', function () {
+    return this.svgWidth / 2 - 40;
   }),
 
-  yPos: computed('svgHeight', 'baseW', function() {
+  yPos: computed('svgHeight', 'baseW', function () {
     return this.svgHeight - this.baseW;
-  })
-
+  }),
 });
