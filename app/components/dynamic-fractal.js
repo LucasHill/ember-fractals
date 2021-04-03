@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import memoizedCalc from 'ember-fractals/utils/memoized-calc';
-import d3Scale from 'npm:d3-scale';
+import d3Scale from 'd3-scale';
 
 export default Ember.Component.extend({
   tagName: '',

@@ -1,6 +1,6 @@
 import Ember from 'ember';
-import d3Selection from 'npm:d3-selection';
-import d3Scale from 'npm:d3-scale';
+import d3Selection from 'd3-selection';
+import d3Scale from 'd3-scale';
 
 const SVG_SELECTOR = '#rootSVG';
 
@@ -31,7 +31,6 @@ export default Ember.Controller.extend({
   },
 
   onMouseMove() {
-// debugger;
     const svg = Ember.$(SVG_SELECTOR);
     const [x, y] = d3Selection.mouse(svg[0]);
 
